@@ -1,0 +1,27 @@
+﻿@model IEnumerable<TopJobsMVC.Models.JobPost>
+
+@{
+    ViewBag.Title = "Get All Job Posts";
+}
+
+<h2>Job Post Listings</h2>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">@item.JobTitle</h5>
+                    <p class="card-text"><strong>Required Skills:</strong> @item.RequiredSkills</p>
+                    <p class="card-text"><strong>Category:</strong> @item.Category</p>
+                    <p class="card-text"><strong>Organisation:</strong> @item.Employers.Organisation</p>
+                </div>
+                <div class="card-footer text-center">
+                    <a href="@Url.Action("ApplyJob", "JobSeeker", new { jobPostId = item.JobPostId })" class="btn btn-primary btn-sm">Apply</a>
+                    <a href="@Url.Action("GetSingleJobPost", "JobSeeker", new { jobPostId = item.JobPostId })" class="btn btn-secondary btn-sm">More Info</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

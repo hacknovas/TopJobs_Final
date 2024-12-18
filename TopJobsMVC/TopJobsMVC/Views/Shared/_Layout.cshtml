@@ -1,0 +1,219 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - TopJobs</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            border-bottom: 2px solid #343a40;
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #17a2b8 !important;
+        }
+
+        .navbar-nav .nav-link {
+            color: #fff !important;
+            padding: 10px 20px;
+            font-size: 1.1rem;
+        }
+
+        .navbar-nav .nav-link:hover {
+            background-color: #17a2b8;
+            border-radius: 5px;
+        }
+
+        .navbar-collapse {
+            justify-content: space-between;
+        }
+
+        .footer {
+            background-color: #343a40;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        .container.body-content {
+            margin-top: 20px;
+        }
+
+        .nav-item a {
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .nav-item a:hover {
+            background-color: #007bff;
+            border-radius: 5px;
+            color: #fff !important;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        /* Media queries for responsive design */
+        @*@media (max-width: 767px) {
+            .navbar-collapse {
+                background-color: #343a40;
+                border-top: 1px solid #444;
+            }*@
+
+            .navbar-nav {
+                text-align: center;
+                margin-top: 10px;
+            }
+
+            .navbar-nav .nav-item {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container-fluid">
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="d-flex w-100 justify-content-between">
+
+                    @Html.ActionLink("TopJobs", "Home", "Dashboard", new { area = "" }, new { @class = "navbar-brand" })
+
+                    <!-- Navbar links for Employer / JobSeeker -->
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                        @if (User.Identity.Name != null)
+                        {
+                            if (User.Identity.Name == "Employer")
+                            {
+                                <li class="nav-item">
+                                    @Html.ActionLink("Home", "Dashboard", "Employer", new { area = "" }, new { @class = "nav-link" })
+                                </li>
+                                <li class="nav-item">
+                                    @Html.ActionLink("Post Job", "CreateJobPostUI", "Employer", new { area = "" }, new { @class = "nav-link" })
+                                </li>
+                                <li class="nav-item">
+                                    @Html.ActionLink("Manage Jobs", "ViewJobPosts", "Employer", new { area = "" }, new { @class = "nav-link" })
+                                </li>
+                            }
+                            else if (User.Identity.Name == "JobSeeker")
+                            {
+                                <li class="nav-item">
+                                    @Html.ActionLink("Home", "Dashboard", "JobSeeker", new { area = "" }, new { @class = "nav-link" })
+                                </li>
+                                <li class="nav-item">
+                                    @Html.ActionLink("My Applications", "JobsApplied", "JobSeeker", new { area = "" }, new { @class = "nav-link" })
+                                </li>
+                                <li class="nav-item">
+                                    @Html.ActionLink("All Jobs", "GetAllJobPost", "JobSeeker", new { area = "" }, new { @class = "nav-link" })
+                                </li>
+                            }
+                            
+                        }
+                    </ul>
+
+                    <!-- Navbar links for Profile / Logout -->
+                    <ul class="navbar-nav mb-2 mb-lg-0">
+                        @if (User.Identity.Name != null)
+                        {
+                            if (User.Identity.Name == "Employer")
+                            {
+                                <li class="nav-item">
+                                    @Html.ActionLink("Profile", "ProfileDetail", "Employer", new { area = "" }, new { @class = "nav-link" })
+                                </li>
+                                <li class="nav-item">
+                                    @Html.ActionLink("Logout", "Logout", "User", new { area = "" }, new { @class = "nav-link" })
+                                </li>
+                            }
+                            else if (User.Identity.Name == "JobSeeker")
+                            {
+                                <li class="nav-item">
+                                    @Html.ActionLink("Profile", "GetJobSProfile", "JobSeeker", new { area = "" }, new { @class = "nav-link" })
+                                </li>
+                                <li class="nav-item">
+                                    @Html.ActionLink("Logout", "Logout", "User", new { area = "" }, new { @class = "nav-link" })
+                                </li>
+                            }
+                            else if (User.Identity.Name == "Admin")
+                            {
+                                <li class="nav-item">
+
+                                </li>
+                                <li class="nav-item">
+                                    @Html.ActionLink("Logout", "Logout", "User", new { area = "" }, new { @class = "nav-link" })
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                @Html.ActionLink("Login", "Login", "User", new { area = "" }, new { @class = "nav-link" })
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Register", "Register", "User", new { area = "" }, new { @class = "nav-link" })
+                            </li>
+                        }
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="mb-0">&copy; @DateTime.Now.Year - TopJobs. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Bundles -->
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+</body>
+
+</html>

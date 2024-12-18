@@ -1,0 +1,154 @@
+﻿@model TopJobsMVC.Models.JobSeeker
+
+@{
+    ViewBag.Title = "JobSeeker Profile";
+}
+
+@using (Html.BeginForm("UpdateJobSProfile", "JobSeeker", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+        <div class="col-md-8 col-lg-6 card p-4">
+            <h4 class="text-center mb-4">JobSeeker Profile</h4>
+            <hr />
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <!-- Hidden Fields -->
+            <div class="mb-3">
+                @Html.HiddenFor(model => model.UserId)
+                @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.HiddenFor(model => model.JobSeekerId)
+                @Html.ValidationMessageFor(model => model.JobSeekerId, "", new { @class = "text-danger" })
+            </div>
+
+            <!-- Profile Fields -->
+            <div class="mb-3">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "form-label" })
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "form-label" })
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "form-label" })
+                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+            </div>
+
+            <!-- Additional Fields -->
+            <div class="mb-3">
+                @Html.LabelFor(model => model.About, htmlAttributes: new { @class = "form-label" })
+                @Html.EditorFor(model => model.About, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.About, "", new { @class = "text-danger" })
+            </div>
+
+            <!-- Resume Path remains a text field -->
+            @*<div class="mb-3">
+                    @Html.LabelFor(model => model.ResumePath, htmlAttributes: new { @class = "form-label" })
+                    @Html.EditorFor(model => model.ResumePath, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ResumePath, "", new { @class = "text-danger" })
+                </div>*@
+
+
+            <!-- Resume File Upload -->
+            @**@
+            <div class="mb-3">
+                @Html.LabelFor(model => model.Skills, htmlAttributes: new { @class = "form-label" })
+                @Html.EditorFor(model => model.Skills, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Skills, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(model => model.Education, htmlAttributes: new { @class = "form-label" })
+                @Html.EditorFor(model => model.Education, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Education, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(model => model.Experience, htmlAttributes: new { @class = "form-label" })
+                @Html.EditorFor(model => model.Experience, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Experience, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(model => model.Organisation, htmlAttributes: new { @class = "form-label" })
+                @Html.EditorFor(model => model.Organisation, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Organisation, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "form-label" })
+                @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+            </div>
+
+            <!-- Submit Button -->
+            <div class="mb-3 text-center">
+                <button type="submit" class="btn btn-primary w-100">Update Profile</button>
+            </div>
+        </div>
+    </div>
+}
+@using (Html.BeginForm("Index", "FileUploads", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="form-group text-center mt-5">
+        <label for="files" class="form-label"></label>
+        <input type="file" name="file" id="files" class="form-control-file" />
+        <input type="number" name="jobseekerid" id="jobseekerids" value="@Model.JobSeekerId" hidden />
+    </div>
+
+    <div class="form-group text-center">
+        <button type="submit" class="btn btn-primary">Upload Resume</button>
+    </div>
+}
+
+@*@using (Html.BeginForm("DownloadFile", "FileUploads", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <input type="number" name="id" id="files" />
+        <button type="submit">Upload</button>
+    }*@
+
+<div class="container mt-4 text-center">
+    <a href="@Url.Action("DisplayFile", "FileUploads", new { id = Model.ResumeId })"
+       target="_blank" class="btn btn-outline-primary mb-3">Full View</a>
+    <button type="button" onclick="displayResume()" class="btn btn-info mb-3">View Resume</button>
+</div>
+
+<!-- Initially hidden iframe, it will be displayed once the button is clicked -->
+<div class="row justify-content-center mt-3">
+    <div class="col-auto">
+        <iframe src="@Url.Action("DisplayFile", "FileUploads", new { id =Model.ResumeId  })"  id="displayresume" width="600" height="500" frameborder="0"
+                style="display:none; border: 2px solid #ccc; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"></iframe>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+    function displayResume() {
+        // Get the resume ID from the model
+        var resumeId = '@Model.ResumeId';  // Ensure Model.ResumeId is set correctly
+
+        // Set the iframe src to the action URL
+        var resumeUrl = '@Url.Action("DisplayFile", "FileUploads", new { id = "__resumeId__" })'.replace('__resumeId__', resumeId);
+
+        // Set the iframe src to the resume URL
+        document.getElementById('displayresume').src = resumeUrl;
+
+        // Make the iframe visible
+        document.getElementById('displayresume').style.display = 'block';
+    }
+    </script>
+}
+

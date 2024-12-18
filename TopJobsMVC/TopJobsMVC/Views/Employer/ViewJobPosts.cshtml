@@ -1,0 +1,32 @@
+﻿@model IEnumerable<TopJobsMVC.Models.JobPost>
+
+@{
+    ViewBag.Title = "ViewJobPosts";
+}
+
+<h2 class="text-center my-4">View Job Posts</h2>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.JobTitle)</h5>
+                    <p class="card-text">
+                        <strong>Created Date:</strong> @Html.DisplayFor(modelItem => item.CreatedDate) <br>
+                        <strong>Expiry Date:</strong> @Html.DisplayFor(modelItem => item.ExpiryDate) <br>
+                        <strong>Vacancy Details:</strong> @Html.DisplayFor(modelItem => item.VacancyDetails) <br>
+                        <strong>Required Skills:</strong> @Html.DisplayFor(modelItem => item.RequiredSkills) <br>
+                        <strong>Category:</strong> @Html.DisplayFor(modelItem => item.Category)
+                    </p>
+                    <div class="btn-group" role="group">
+                        @Html.ActionLink("Edit", "SingleJobPost", new { jobpostid = item.JobPostId }, new { @class = "btn btn-primary btn-sm" })
+                        @Html.ActionLink("Delete", "DeleteJobPost", new { jobpostid = item.JobPostId }, new { @class = "btn btn-danger btn-sm" })
+                        @Html.ActionLink("Applications", "GetRecievedApplication", new { jobpostid = item.JobPostId }, new { @class = "btn btn-info btn-sm" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

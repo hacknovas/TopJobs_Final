@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+}
+
+<h2 class="text-center mb-5">Search Employers & Job Seekers</h2>
+
+<div class="row justify-content-center">
+    <!-- Search Employer Form -->
+    <div class="col-md-6 col-lg-4 mb-4">
+        <form action="@Url.Action("GetEmployerBySearch", "Admin")" method="get" class="input-group">
+            <input type="number" class="form-control" placeholder="Search Employer..." name="searchEmployer" aria-label="Search Employers" />
+            <button class="btn btn-primary" type="submit">Search Employer</button>
+        </form>
+    </div>
+
+    <!-- Search Job Seeker Form -->
+    <div class="col-md-6 col-lg-4 mb-4">
+        <form action="@Url.Action("GetJobSeekerBySearch", "Admin")" method="get" class="input-group">
+            <input type="number" class="form-control" placeholder="Search Job Seeker..." name="searchJobSeeker" aria-label="Search Job Seekers" />
+            <button class="btn btn-success" type="submit">Search Job Seeker</button>
+        </form>
+    </div>
+</div>
+
+<!-- Link to Get All Jobs -->
+<div class="text-center mt-4">
+    <a href="@Url.Action("GetAllJobs", "Admin")" class="btn btn-info">View All Jobs</a>
+</div>

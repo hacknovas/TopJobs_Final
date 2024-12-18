@@ -1,0 +1,99 @@
+﻿@model TopJobsMVC.Models.JobPost
+
+@{
+    ViewBag.Title = "GetSingleJobPost";
+}
+
+<h2>Job Post Details</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Job Information</h4>
+                    <hr />
+
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">@Html.DisplayNameFor(model => model.JobTitle)</label>
+                        <div class="col-sm-9">
+                            <p class="form-control-plaintext">@Html.DisplayFor(model => model.JobTitle)</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">@Html.DisplayNameFor(model => model.JobDetails)</label>
+                        <div class="col-sm-9">
+                            <p class="form-control-plaintext">@Html.DisplayFor(model => model.JobDetails)</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">@Html.DisplayNameFor(model => model.CreatedDate)</label>
+                        <div class="col-sm-9">
+                            <p class="form-control-plaintext">@Html.DisplayFor(model => model.CreatedDate)</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">@Html.DisplayNameFor(model => model.ExpiryDate)</label>
+                        <div class="col-sm-9">
+                            <p class="form-control-plaintext">@Html.DisplayFor(model => model.ExpiryDate)</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">@Html.DisplayNameFor(model => model.VacancyDetails)</label>
+                        <div class="col-sm-9">
+                            <p class="form-control-plaintext">@Html.DisplayFor(model => model.VacancyDetails)</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">@Html.DisplayNameFor(model => model.RequiredSkills)</label>
+                        <div class="col-sm-9">
+                            <p class="form-control-plaintext">@Html.DisplayFor(model => model.RequiredSkills)</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">@Html.DisplayNameFor(model => model.Category)</label>
+                        <div class="col-sm-9">
+                            <p class="form-control-plaintext">@Html.DisplayFor(model => model.Category)</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">@Html.DisplayNameFor(model => model.salary)</label>
+                        <div class="col-sm-9">
+                            <p class="form-control-plaintext">@Html.DisplayFor(model => model.salary)</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">@Html.DisplayNameFor(model => model.Location)</label>
+                        <div class="col-sm-9">
+                            <p class="form-control-plaintext">@Html.DisplayFor(model => model.Location)</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">@Html.DisplayNameFor(model => model.Employers.Organisation)</label>
+                        <div class="col-sm-9">
+                            <p class="form-control-plaintext">@Html.DisplayFor(model => model.Employers.Organisation)</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">@Html.DisplayNameFor(model => model.Employers.OrganisationDetails)</label>
+                        <div class="col-sm-9">
+                            <p class="form-control-plaintext">@Html.DisplayFor(model => model.Employers.OrganisationDetails)</p>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

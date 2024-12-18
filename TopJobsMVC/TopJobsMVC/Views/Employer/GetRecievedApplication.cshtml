@@ -1,0 +1,156 @@
+﻿@model IEnumerable<TopJobsMVC.Models.JobApplication>
+
+@{
+    ViewBag.Title = "GetRecievedApplication";
+}
+
+<div class="text-center">
+
+    <h2>Received Applications</h2>
+
+
+</div>
+<h5>Job Details:</h5>
+<h4 class="mb-3">
+    @Html.DisplayFor(model => model.FirstOrDefault().JobPosts.JobTitle)
+</h4>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Applicant</th>
+            <th>Status</th>
+            <th>Change Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.JobSeekers.Name)
+                </td>
+                <td>
+                    @if (item.JobApprovedStatus == TopJobsMVC.Models.JobStatus.Accepted)
+                    {
+                        <span class="badge bg-success">Accepted</span>
+                    }
+                    else if (item.JobApprovedStatus == TopJobsMVC.Models.JobStatus.Rejected)
+                    {
+                        <span class="badge bg-danger">Rejected</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-primary">Pending</span>
+                    }
+                </td>
+                <td>
+                    <!-- Change Status Form -->
+                    @using (Html.BeginForm("ChangeApplicationStatus", "Employer", FormMethod.Post, new { @class = "d-inline" }))
+                    {
+                        <input type="text" name="ApplicationId" value="@item.ApplicationId" hidden />
+                        <select name="JobApprovedStatus" class="form-control" onchange="this.form.submit();">
+                            @*<option value=""></option>*@
+                            <option value="@TopJobsMVC.Models.JobStatus.Pending" @(item.JobApprovedStatus == TopJobsMVC.Models.JobStatus.Pending ? "selected" : "")>Pending</option>
+                            <option value="@TopJobsMVC.Models.JobStatus.Accepted" @(item.JobApprovedStatus == TopJobsMVC.Models.JobStatus.Accepted ? "selected" : "")>Accepted</option>
+                            <option value="@TopJobsMVC.Models.JobStatus.Rejected" @(item.JobApprovedStatus == TopJobsMVC.Models.JobStatus.Rejected ? "selected" : "")>Rejected</option>
+                        </select>
+                    }
+
+                </td>
+                <td>
+                    <!-- See Details Button -->
+                    <button type="button" class="btn btn-info btn-sm" onclick="displayDetails(@item.JobSeekerId)">See Details</button>
+
+                </td>
+            </tr>
+
+            <!-- Job Seeker Details Row (Hidden Initially) -->
+            <tr id="details-@item.JobSeekerId" style="display:none;">
+                <td colspan="4">
+                    <div class="card mt-2">
+                        <div class="card-body">
+                            <h5 class="card-title">Job Seeker Details</h5>
+
+                            <!-- Start of Job Seeker Details Box -->
+                            <div class="row">
+                                <div class="col-md-4"><strong>Name:</strong></div>
+                                <div class="col-md-8">@item.JobSeekers.Name</div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-md-4"><strong>Experience:</strong></div>
+                                <div class="col-md-8">@item.JobSeekers.Experience</div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-md-4"><strong>Phone:</strong></div>
+                                <div class="col-md-8">@item.JobSeekers.PhoneNumber</div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-md-4"><strong>Email:</strong></div>
+                                <div class="col-md-8">@item.JobSeekers.Email</div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-md-4"><strong>Skills:</strong></div>
+                                <div class="col-md-8">@item.JobSeekers.Skills</div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-md-4"><strong>Organisation:</strong></div>
+                                <div class="col-md-8">@item.JobSeekers.Organisation</div>
+                            </div>
+                            <hr />
+                            @*<div class="row">
+                                    <div class="col-md-4"><strong>Resume:</strong></div>
+                                    <div class="col-md-8"><a href="@item.JobSeekers.ResumePath" target="_blank">Download Resume</a></div>
+                                </div>*@
+                            <!-- End of Job Seeker Details Box -->
+
+
+                            <div class="container mt-4 text-center">
+                                <a href="@Url.Action("DisplayFile", "FileUploads", new { id = item.JobSeekers.ResumeId })"
+                                   target="_blank" class="btn btn-outline-primary mb-3">View Resume</a>
+                            </div>
+
+                            <!-- Initially hidden iframe, it will be displayed once the button is clicked -->
+                            @*<div class="row justify-content-center mt-3">
+                                <div class="col-auto">
+                                    <embed src="@Url.Action("DisplayFile", "FileUploads", new { id =item.JobSeekers.ResumeId  })" id="displayresume" width="600" height="500" frameborder="0"
+                                            style="display:none; border: 2px solid #ccc; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"></embed>
+                                </div>
+                            </div>*@
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+
+<script>
+    function displayDetails(jobSeekerId) {
+        var detailsRow = document.getElementById("details-" + jobSeekerId);
+        if (detailsRow.style.display === "none") {
+            detailsRow.style.display = "table-row";
+        } else {
+            detailsRow.style.display = "none";
+        }
+    }
+    //function displayResume() {
+    //    var detailsRow = document.getElementById("displayresume");
+    //    if (detailsRow.style.display === "none") {
+    //        detailsRow.style.display = "block";
+    //    } else {
+    //        detailsRow.style.display = "none";
+    //    }
+    //}
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+}

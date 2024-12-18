@@ -1,0 +1,63 @@
+﻿@model TopJobsMVC.Models.JobSeeker
+
+@{
+    ViewBag.Title = "GetJobSeekerBySearch";
+}
+
+<h2 class="text-center mb-4">Job Seeker Details</h2>
+
+<div class="container">
+    <h4 class="mb-3">Job Seeker Information</h4>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-3">
+            <strong>@Html.DisplayNameFor(model => model.UserId)</strong>
+        </div>
+        <div class="col-md-9">
+            @Html.DisplayFor(model => model.UserId)
+        </div>
+
+        <div class="col-md-3">
+            <strong>@Html.DisplayNameFor(model => model.Name)</strong>
+        </div>
+        <div class="col-md-9">
+            @Html.DisplayFor(model => model.Name)
+        </div>
+
+        <div class="col-md-3">
+            <strong>@Html.DisplayNameFor(model => model.PhoneNumber)</strong>
+        </div>
+        <div class="col-md-9">
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </div>
+
+        <div class="col-md-3">
+            <strong>@Html.DisplayNameFor(model => model.ResumePath)</strong>
+        </div>
+        <div class="col-md-9">
+            @Html.DisplayFor(model => model.ResumePath)
+        </div>
+
+        <div class="col-md-3">
+            <strong>@Html.DisplayNameFor(model => model.Skills)</strong>
+        </div>
+        <div class="col-md-9">
+            @Html.DisplayFor(model => model.Skills)
+        </div>
+
+        <div class="col-md-3">
+            <strong>@Html.DisplayNameFor(model => model.Experience)</strong>
+        </div>
+        <div class="col-md-9">
+            @Html.DisplayFor(model => model.Experience)
+        </div>
+
+        <div class="col-md-3">
+            <strong>@Html.DisplayNameFor(model => model.Organisation)</strong>
+        </div>
+        <div class="col-md-9">
+            @Html.DisplayFor(model => model.Organisation)
+        </div>
+    </div>
+</div>

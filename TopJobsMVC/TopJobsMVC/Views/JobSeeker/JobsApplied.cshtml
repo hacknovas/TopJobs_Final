@@ -1,0 +1,43 @@
+﻿@model IEnumerable<TopJobsMVC.Models.JobApplication>
+
+@{
+    ViewBag.Title = "Jobs Applied";
+}
+
+<h2>Jobs Applied</h2>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 col-sm-6 mb-4">
+            <div class="card" style="width: 100%;">
+                <div class="card-body">
+                    <h5 class="card-subtitle mb-2 text-muted">Job Title: @item.JobPosts.JobTitle</h5>
+                    <h6 class="card-title">Category: @item.JobPosts.Category</h6>
+
+                    <p class="card-text">
+                        <strong>Status: </strong>
+                        @if (item.JobApprovedStatus == TopJobsMVC.Models.JobStatus.Accepted)
+                        {
+                            <span class="badge bg-success">Accepted</span>
+                        }
+                        else if (item.JobApprovedStatus == TopJobsMVC.Models.JobStatus.Rejected)
+                        {
+                            <span class="badge bg-danger">Rejected</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-primary">Pending</span>
+                        }
+                    </p>
+
+                    <div class="d-flex justify-content-between">
+                        <a href="@Url.Action("GetSingleJobPost", "JobSeeker", new { jobPostId = item.JobPostId })" class="card-link text-info">More Info</a>
+                        <a href="@Url.Action("WithdrawApplication", "JobSeeker", new { applicationId = item.ApplicationId })" class="card-link text-danger">Withdraw</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+

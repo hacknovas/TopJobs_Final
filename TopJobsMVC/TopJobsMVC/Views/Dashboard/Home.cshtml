@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "Home";
+}
+
+<div class="container my-5">
+    <!-- Heading Section -->
+    <div class="text-center mb-5">
+        <h2 class="display-4">Welcome to TopJobs</h2>
+    </div>
+
+    <!-- About Our Site Section -->
+    <section class="mb-5">
+        <h3 class=" text-center h3 text-primary mb-3">About Our Site</h3>
+        <p class="lead">
+            Welcome to our platform, where job seekers and employers can connect seamlessly. We provide a comprehensive job board, allowing job seekers to browse various job opportunities and apply directly to positions that match their skills and interests. Employers can post job openings and access a wide range of talented professionals.
+        </p>
+    </section>
+
+    <!-- Our Platform in Action Section -->
+    <section class="mb-5">
+        <h3 class="text-center text-primary mb-4">Our Platform in Action</h3>
+        <div class="row justify-content-center">
+            <div class="col-md-4 text-center mb-4">
+                <img src="https://cdn.pixabay.com/photo/2019/09/05/04/39/dream-job-4453054_1280.jpg" alt="Job Search" class="img-fluid rounded">
+                <h5>Easy Job Search</h5>
+                <p>Our platform makes it easy to search for jobs by category, location, and more.</p>
+            </div>
+            <div class="col-md-4 text-center mb-4">
+                <img src="https://cdn.pixabay.com/photo/2020/07/08/04/12/work-5382501_1280.jpg" alt="Profile Management" class="img-fluid rounded">
+                <h5>Manage Your Profile</h5>
+                <p>Keep your resume and personal details up-to-date and apply for jobs directly from your profile.</p>
+            </div>
+            <div class="col-md-4 text-center mb-4">
+                <img src="https://cdn.pixabay.com/photo/2017/10/31/09/55/dream-job-2904780_1280.jpg" alt="Employer Job Post" class="img-fluid rounded">
+                <h5>Post Job Openings</h5>
+                <p>Employers can post job openings and view candidates that match their requirements.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Features Section -->
+    <section class="mb-5 text-center">
+        <h3 class="h3 text-primary mb-3">Key Features</h3>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Browse job listings across different categories.</li>
+            <li class="list-group-item">Apply for jobs directly on the platform.</li>
+            <li class="list-group-item">Create and manage your professional profile.</li>
+            <li class="list-group-item">Search for candidates or job openings with ease.</li>
+        </ul>
+    </section>
+
+    @if (!User.Identity.IsAuthenticated)
+    {
+
+
+        <!-- Get Started Section -->
+        <section class="mb-5 text-center">
+            <h3>Get Started</h3>
+            <p>
+                To get started, you can either register for a new account or log in if you already have an account.
+            </p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="@Url.Action("Register", "User")" class="btn btn-primary btn-lg">Register</a>
+                <a href="@Url.Action("Login", "User")" class="btn btn-secondary btn-lg">Login</a>
+            </div>
+        </section>
+    }
+
+    <!-- Contact Section -->
+    <section class="text-center mt-5">
+        <h3>Need Help?</h3>
+        <p>If you need assistance, feel free to contact our support team at <strong>support@topjobs.com</strong>.</p>
+    </section>
+</div>

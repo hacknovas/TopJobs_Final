@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "Employer Dashboard";
+    var userName = ((TopJobsMVC.Models.User)Session["User"]).Username;
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Welcome, @userName</h2>
+
+    <!--<div class="row">-->
+    <!-- Search Bar for Job Posts -->
+    <!--<div class="col-md-8 offset-md-2 mb-4 text-center">
+            <form action="@Url.Action("SearchJobPost", "Employer")" method="get" class="input-group">
+                <input type="text" class="form-control" placeholder="Search Job Posts..." name="searchQuery" aria-label="Search Job Posts" />
+                <button class="btn btn-primary" type="submit">Search</button>
+            </form>
+        </div>
+    </div>-->
+
+    <div class="text-center">
+
+        <!-- Dashboard Stats (Optional) -->
+        <div class=" row mt-4">
+            <div class="col-md-4 mb-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Job Posts</h5>
+                        <p class="card-text">You have created 5 job posts.</p>
+                    </div>
+                </div>
+            </div>
+            @*<div class="col-md-4 mb-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5 class="card-title">Pending Applications</h5>
+                            <p class="card-text">You have 3 pending job applications.</p>
+                        </div>
+                    </div>
+                </div>*@
+            <div class="col-md-4 mb-4">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Accepted Candidates</h5>
+                        <p class="card-text">You have 2 accepted candidates for your job posts.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

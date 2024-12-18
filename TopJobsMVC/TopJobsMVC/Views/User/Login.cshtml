@@ -1,0 +1,59 @@
+﻿@model TopJobsMVC.Models.User
+
+@{
+    ViewBag.Title = "Login";
+}
+
+@using (Html.BeginForm("Login", "User", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+        <div class="col-md-6 col-lg-4 card p-4">
+            <h4 class="text-center mb-4">User Login</h4>
+            <hr />
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <!-- Username Field -->
+            <div class="mb-3 row">
+                <div class="col-sm-3">
+                    @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "form-label" })
+                </div>
+                <div class="col-sm-9">
+                    @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter username" } })
+                    @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <!-- Password Field -->
+            <div class="mb-3 row">
+                <div class="col-sm-3">
+                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "form-label" })
+                </div>
+                <div class="col-sm-9">
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter password" } })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="mb-3 text-center">
+                <button type="submit" class="btn btn-primary btn-lg w-100">Login</button>
+            </div>
+
+            <!-- Error Message -->
+            @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+            {
+                <div class="alert alert-danger text-center">
+                    @ViewBag.ErrorMessage
+                </div>
+            }
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

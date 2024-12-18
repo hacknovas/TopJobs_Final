@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+    var userName = ((TopJobsMVC.Models.User)Session["User"]).Username;
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Welcome, @userName</h2>
+
+    <!--<div class="row">-->
+        <!-- Search Bar -->
+        <!--<div class="col-md-8 offset-md-2 mb-4 text-center">
+            <form action="@Url.Action("SearchJobPost", "JobSeeker")" method="get" class="input-group">
+                <input type="text" class="form-control" placeholder="Search Jobs..." name="searchQuery" aria-label="Search Jobs" />
+                <button class="btn btn-primary" type="submit">Search</button>
+            </form>
+        </div>
+    </div>-->
+
+    <div class="row mt-4">
+        <!-- Dashboard Stats -->
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Total Jobs Applied</h5>
+                    <p class="card-text">10</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Job Alerts</h5>
+                    <p class="card-text">3 New Alerts</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Profile Completion</h5>
+                    <p class="card-text">80%</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
